@@ -1,0 +1,95 @@
+html,
+body {
+  margin: auto;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 50% 50% 50%;
+  width: 90%;
+  height: 35rem;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-width: 1px;
+  margin: auto;
+}
+
+body > div, .container > div, .row1 > div {
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-width: 1px;
+  text-align: center;
+}
+
+.nav {
+width: 100%;
+z-index: 1000;
+}
+
+.row1 {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: auto 5% auto 5% auto;
+}
+
+img {
+max-height: 50%;
+max-width: 50%;
+}
+/* sidebar data; I deleted a bunch of unnecessary stuff*/
+.main-menu:hover,
+nav.main-menu.expanded {
+    width: 250px;
+    overflow: visible;
+}
+.main-menu {
+  /*some amount of this is needec; deleting it makes the page all one big bar*/
+    background: #fbfbfb;
+    border-right: 1px solid #e5e5e5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 20px;
+    overflow: hidden;
+    -webkit-transition: width .05s linear;
+    transition: width .05s linear;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    z-index: 0;
+    
+}
+.no-touch .scrollable.hover {
+    overflow-y: hidden;
+}
+.no-touch .scrollable.hover:hover {
+    overflow-y: auto;
+
+}
+/*this keeps bullet points off on the sidebar, I like this*/
+nav ul,
+nav li {
+    outline: 0;
+    margin: 0;
+    padding: 0;
+}
+/*this is needed for now*/
+.area {
+    float: left;
+    background: #e2e2e2;
+    width: fit-content;
+    height: 100%;
+}
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+.btn {
+  border-radius: 12px;
+  font-size: 16px;
+  border: 2px solid black;}

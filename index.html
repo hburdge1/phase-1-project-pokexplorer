@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+
+    
+    
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"/>
+      
+    <title>Pokemon Viewer</title>
+  </head>
+  <body>
+    <!--top navbar-->
+      <nav class='nav'>
+        <form class="d-flex ms-auto order-5" id='monLookup'>
+          <input id = 'mon'
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <a class="navbar-brand" href="#">PokeXplorer</a>
+              <span class="navbar-toggler-icon"></span>
+              <!--searchbar-->
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+         
+<!--dropdown for type-->
+        <select id="typeChoice">
+          <option id = 'type-button'>type</option>
+          <option id = "normal" value = "normal">normal</option>
+          <option id = "fire" value = "fire" >fire</option>
+          <option id = "water" value = "water" >water</option>
+          <option id = "grass" value = "grass">grass</option>
+          <option id = "electric" value = "electric">electric</option>
+          <option id = "ice" value = "ice">ice</option>
+          <option id = "fighting" value = "fighting" >fighting</option>
+          <option id = "poison" value = "poison" >poison</option>
+          <option id = "ground" value = "ground">ground</option>
+          <option id = "flying" value = "flying">flying</option>
+          <option id = "psychic" value = "psychic">psychic</option>
+          <option id = "bug" value = "bug" >bug</option>
+          <option id = "rock" value = "rock" >rock</option>
+          <option id = "ghost" value = "ghost">ghost</option>
+          <option id = "dark" value = "dark">dark</option>
+          <option id = "dragon" value = "dragon" >dragon</option>
+          <option id = "steel" value = "steel">steel</option>
+          <option id = "fairy" value = "fairy">fairy</option>
+        </select>
+<!--dropdown for region-->
+        <select id="regionChoice">
+          <option id = 'region'>region</option>
+          <option id = "kanto" value = "Kanto" >Kanto (Gen I)</option>
+          <option id = "johto" value = "Johto" >Johto (Gen II)</option>
+          <option id = "hoenn" value = "Hoenn" >Hoenn (Gen III)</option>
+          <option id = "sinnoh" value = "Sinnoh">Sinnoh(Gen IV)</option>
+          <option id = "unova" value = "Unova">Unova(Gen V)</option>
+        </select>
+
+          <!-- side navbar/mons listing-->      
+          <div class="area"></div>
+  <nav class="main-menu">
+    <ul id = 'mon-list'>
+    </ul>
+
+  </nav>
+
+
+<!--main content -->
+      <div class='container'>
+        <div class='row1'>
+          <div class="devolved">devolved</div>
+          <div class='evol-arrow'></div>
+          <div class="featured-mon">
+            <img
+              id="main-img"
+     src="https://imgr.search.brave.com/c4xDeV24zvAUUa123nXYalZjeInd9GoYvf08fyQbIYY/fit/759/225/ce/1/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5a/bDNQT2plX1RJNHNX/bXZZMVFOcHhBSGFF/byZwaWQ9QXBp"
+            /><br>
+            <span id="mon-id">Choose a pokemon to see its details<span>
+              <br>
+          </div>
+          <div class='evol-arrow2'></div>
+          <div class='evolved'>evolved</div>
+        </div>
+
+      <div class="dex-regions">
+        <span>Region and Dex Number</span>
+
+        <ul id="dex-regions">
+            
+        </ul>
+      </div>
+
+      <div class='statbox'><h4>Base stats</h4> 
+        <ul id="monstats"></ul>
+      </div>
+
+      <div class="abilities">
+        <h4>Abilities</h4>
+        <ul id="abilities">
+        </ul>
+      </div>
+
+      <div class="weak">
+        <span>Weak to:</span>
+        <ul id="weak-type-to"></ul>
+        <ul id="weak-type-from"></ul>
+      </div>
+
+      <div class="type">
+        <span>Type(s)</span>
+        <ul id="pkmn-type"></ul>
+      </div>
+
+      <div class="strong">
+        <span>Strong against:</span>
+        <ul id="strong-type-to"></ul>
+        <ul id="strong-type-from"></ul>
+      </div>
+
+    </div>
+    
+    <script language="javascript" defer src = "./src/index.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script> 
+      </body>
+  </html>
+    
