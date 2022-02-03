@@ -5,35 +5,25 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+      content="width=device-width,  shrink-to-fit=yes"
     />
 
     
     
     <link rel="stylesheet" type="text/css" href="main.css"/>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"/>
+
       
     <title>Pokemon Viewer</title>
   </head>
   <body>
+          <nav class='nav-top'>
+        <span class='title'><b>PokeXplorer</b></span>
+        <form class="d-flex ms-auto order-5 align-center" id='monLookup'>
+   
     <!--top navbar-->
-      <nav class='nav'>
-        <form class="d-flex ms-auto order-5" id='monLookup'>
-          <input id = 'mon'
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <a class="navbar-brand" href="#">PokeXplorer</a>
-              <span class="navbar-toggler-icon"></span>
+
               <!--searchbar-->
-        <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+Refine By: 
          
 <!--dropdown for type-->
         <select id="typeChoice">
@@ -67,30 +57,56 @@
           <option id = "unova" value = "Unova">Unova(Gen V)</option>
         </select>
 
+                    <!--searchbar-->
+       <input id = 'mon'
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <!--searchbar-->
+    <button class="btn btn-outline-success" type="submit">Search</button>
+    
+        
+        </form>
+        
+        </nav>
+
           <!-- side navbar/mons listing-->      
-          <div class="area"></div>
+         <div class="area">
   <nav class="main-menu">
     <ul id = 'mon-list'>
     </ul>
-
+  </nav>
+</div>
   </nav>
 
+         <div class="area">
+  <nav class="right-menu">
+    <span>Team Builder</span>
+    <ul id = 'my-mons'>
+    </ul>
+  </nav>
+</div>
+  </nav>
 
 <!--main content -->
       <div class='container'>
         <div class='row1'>
-          <div class="devolved">devolved</div>
+          <div class="devolved"></div>
           <div class='evol-arrow'></div>
           <div class="featured-mon">
             <img
               id="main-img"
-     src="https://imgr.search.brave.com/c4xDeV24zvAUUa123nXYalZjeInd9GoYvf08fyQbIYY/fit/759/225/ce/1/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5a/bDNQT2plX1RJNHNX/bXZZMVFOcHhBSGFF/byZwaWQ9QXBp"
+     src="https://images2.fanpop.com/images/photos/8100000/pokemon-explorers-of-sky-pokemon-8167775-2507-2560.jpg"
             /><br>
             <span id="mon-id">Choose a pokemon to see its details<span>
               <br>
           </div>
           <div class='evol-arrow2'></div>
-          <div class='evolved'>evolved</div>
+          <div class='evolved'></div>
         </div>
 
       <div class="dex-regions">
@@ -107,13 +123,14 @@
 
       <div class="abilities">
         <h4>Abilities</h4>
-        <ul id="abilities">
-        </ul>
+        <span id="abilities">
+        </span>
       </div>
 
       <div class="weak">
-        <span>Weak to:</span>
+        <span>This pokemon's same-type-attack moves are not very effective on following types:</span>
         <ul id="weak-type-to"></ul>
+        <span>This pokemon is weak against the following move types</span>
         <ul id="weak-type-from"></ul>
       </div>
 
@@ -123,8 +140,9 @@
       </div>
 
       <div class="strong">
-        <span>Strong against:</span>
+        <span>This pokemon's same-type-attack moves are super effective on following types:</span>
         <ul id="strong-type-to"></ul>
+        <span>This pokemon resists moves of the following types:</span>
         <ul id="strong-type-from"></ul>
       </div>
 

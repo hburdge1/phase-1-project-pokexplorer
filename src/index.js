@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     // full-scope variables
 const monsUrl = "https://pokeapi.co/api/v2/pokemon/"
@@ -11,16 +13,34 @@ const strongTypeFrom = document.getElementById("strong-type-from")
 const weakTypeTo = document.getElementById("weak-type-to")
 const weakTypeFrom = document.getElementById("weak-type-from")
 const monList = document.getElementById("mon-list")
+let weaknesses = false
 const damageValues = {}
 const typeCheck = {}
+
 let monNames = [] 
 let typesArr = []
+  let teamDiv = document.createElement('div')
 let typesUrlArr = [] 
 let regionArr = []
 let courseArr = []
 let dataset
 let regionNameString
 
+// function duplicateChildNodes (parentId){
+//   var parent = document.getElementById(parentId);
+//   NodeList.prototype.forEach = Array.prototype.forEach;
+//   var children = parent.childNodes;
+//   children.forEach(function(item){
+//     var cln = item.cloneNode(true);
+//     parent.appendChild(cln);
+//   });
+// };
+
+// duplicateChildNodes("container");
+
+function toTitleCase(upper) {
+  return upper.charAt(0).toUpperCase() + upper.slice(1);
+}
 //remove children//
 function removeAllChildNodes(parent) {
                 while (parent.firstChild) {
@@ -32,7 +52,7 @@ function removeAllChildNodes(parent) {
 //main code start//
 //initial data fetch//
 function openingFetch(){
-    fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
+    fetch('https://pokeapi.co/api/v2/pokemon/?limit=649')
         .then(response => response.json())
         .then(data => {
             dataset = data;
@@ -44,6 +64,7 @@ function openingFetch(){
             
         });
     }
+    
 //closure: initial data fetch//
     openingFetch()
 //find types initially//
@@ -85,6 +106,7 @@ getTypes()
 //sidebar start
 function loadSidebar(namesArr) {
         namesArr.forEach(mon => {
+
             let nameLi = document.createElement("li")
             monNames.push(mon.name)
             nameLi.innerHTML = mon.name
@@ -95,8 +117,41 @@ function loadSidebar(namesArr) {
  }
 
 //get mon loaded
+// let evolDataset =[]
 
+// let evolFin = []
 
+//  function retrieveEvolution() {
+//         fetch ('https://pokeapi.co/api/v2/evolution-chain/?limit=335')
+//             .then(data => data.json())
+//             .then(p => {
+//                 const alphaNumEvol = [];
+//                 alphaNumEvol.push([p]);
+//                 //let newEvolArr = (alphaNumEvol[0])
+//                 evolDataset = [alphaNumEvol[0][0].results]
+//                 console.log(evolDataset)
+//                 let keyAll = Object.keys(evolDataset)
+//                 let keyArr = (evolDataset[keyAll])
+//                 keyArr.forEach(k => {
+//                     fetch(Object.values(k))
+//                     .then(data => data.json())
+//                     .then(j => {
+//                         evolFin.push(j.chain)
+//                         evolFin.forEach(link => 
+//                             delete (link.is_baby))
+//                         evolFin.forEach(link => 
+//                             delete (link.evolution_details))
+                        
+//                     })
+//                 })
+//                })                       
+        
+//            } 
+
+//   retrieveEvolution()
+  
+
+        
 
 //featured mon on page fetched; data needed is mon.name or mon.id//
 function fetchMon(mon) {
@@ -104,6 +159,7 @@ function fetchMon(mon) {
                 .then(data => data.json())
                 .then(part => renderMon(part))
 }
+
 //end fetch of feat mon//
 
 //**event listener set on search bar//
@@ -114,50 +170,77 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
         .then(mon => renderMon(mon))
 
 })
+
 //--render fetched data from pokemon url//
         function renderMon(part){
-                    document.getElementById('main-img').src = "/Users/hannahburdge/phase-1-project/src/sprites/sprites/pokemon/model/" + part.id + '.png'
+ 
+                    monImage = document.getElementById('main-img')
+                    monImage.src = "src/pokemon/" + part.id + ".png"
+                    let myMonTeam = document.getElementById('my-mons')
+                       
+                    if (monImage.hasListener == true){removeAllChildNodes(teamDiv)}
+                        //typebutton.innerText = 
+                  
+                    if (monImage.hasListener) ()=> monImage.removeEventListener('click', addToTeam())
+         
+                    monImage.addEventListener('click', function addToTeam() {
+                    let monTeamName = document.createElement('span')
+                    let teamImg = document.createElement('img')                 
+                        monImage.hasListener = true;
+                      
+                         
+                     monTeamName.innerHTML = `${part.name}`
+                        teamImg.src = "src/sprites/sprites/sprites/pokemon/" + part.id + '.png'
+                        teamDiv.append(teamImg)
+                        teamDiv.append(monTeamName)
+                    //    
+                    })
+                       myMonTeam.append(teamDiv) 
+                      
+                    
                     document.getElementById('mon-id').innerHTML = part.order + ": " + part.name
                     loadDexEntries(part)
-    //**calls loadDexEntries/
+
 //still RenderMon//            //--game appearances load//
                     let allGames = part.game_indices
                     removeAllChildNodes(dexRegions)
                     allGames.forEach(game => {
-                        const dexLi = document.createElement("li")
+                        const dexLi = document.createElement("span")
                         dexLi.innerHTML =  game.version.name 
                         dexRegions.appendChild(dexLi)
+                        $('<br>').insertBefore(dexLi)
                          //--game appearances load//
                     })
-           
+
  //still RenderMon//            //--abilities load//
                     let allAbil = part.abilities
                     removeAllChildNodes(abilities)
                     allAbil.forEach(abil => {
-                        let ability = document.createElement("li")
-                        ability.innerHTML = (abil.ability.name) + ": " + (abil.is_hidden ? "hidden" : "")
+                        let ability = document.createElement("span")
+                        ability.innerHTML = (abil.ability.name).split('-').join(' ') + (abil.is_hidden ? "(hidden)" : "")
                         abilities.appendChild(ability)
+                        $('<br>').insertBefore(ability)
             //--abilities load//
                     })
  //still RenderMon//            //--stats load//
                     if (statList.hasChildNodes) { removeAllChildNodes(statList) }
-                    const HP = document.createElement("li")
-                    HP.innerHTML = "HP " + part.stats[0].base_stat
+                    const HP = document.createElement("span")
+                    HP.innerHTML = `HP: ${part.stats[0].base_stat}<br>`
                     statList.appendChild(HP)
-                    const atk = document.createElement("li")
-                    atk.innerHTML = "Attack: " + part.stats[1].base_stat
+                    const atk = document.createElement("span")
+                    atk.innerHTML = `Attack: ${part.stats[1].base_stat}<br>`
                     statList.appendChild(atk)
-                    const def = document.createElement("li")
-                    def.innerHTML = "Defense: " + part.stats[2].base_stat
+                    const def = document.createElement("span")
+                    def.innerHTML = `Defense: ${part.stats[2].base_stat}<br>`
                     statList.appendChild(def)
-                    const spatk = document.createElement("li")
-                    spatk.innerHTML = "Special attack: " + part.stats[3].base_stat
+                    const spatk = document.createElement("span")
+                    spatk.innerHTML = `Special attack: ${part.stats[3].base_stat}<br>`
                     statList.appendChild(spatk)
-                    const spdef = document.createElement("li")
-                    spdef.innerHTML = "Special defense: " + part.stats[4].base_stat
+                    const spdef = document.createElement("span")
+                    spdef.innerHTML = `Special Defense: ${part.stats[4].base_stat}<br>`
                     statList.appendChild(spdef)
-                    const speed = document.createElement("li")
-                    speed.innerHTML = "Speed: " + part.stats[5].base_stat
+                    const speed = document.createElement("span")
+                    speed.innerHTML = `Speed: ${part.stats[5].base_stat}<br>`
 
                     statList.appendChild(speed)
 //still RenderMon//                     //***/ bst summation loop
@@ -166,55 +249,99 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
                     for (let i = 0; i < 6; i++) {
                         sum += part.stats[i].base_stat;
                     }
-                    bst.innerHTML = "Base Stat Total(BST):" + sum
-                    statList.appendChild(bst)
+                   statList.appendChild(bst)
+                    if (sum>500){bst.classList.add("good")
+                    bst.innerHTML = ("Base Stat Total(BST):" + `${sum}<br>` + "This pokemon's BST is above average.")}
+                     else if ((sum<=500) &&(sum>=400)){bst.classList.add("fine")
+                    bst.innerHTML = ("Base Stat Total(BST):" + `${sum}<br>` + "This pokemon's BST is average.")}
+                    else if (sum < 400){bst.classList.add("rough")
+                    bst.innerHTML = ("Base Stat Total(BST):" + `${sum}<br>` + "This pokemon's BST is below average.")}
+                   
 //still RenderMon//                     //**/ bst summation loop
 //still RenderMon//                    //give feat mon types-two only//   
 //start to setelement-relationships//
-                    let montypes = part.types
+                     
                     removeAllChildNodes(pkmnType)
+                         removeAllChildNodes(weakTypeTo)
+                          removeAllChildNodes(weakTypeFrom)
+                           removeAllChildNodes(strongTypeTo)
+                            removeAllChildNodes(strongTypeFrom)
+                       
+                    let montypes = part.types
                     montypes.forEach(bit => {
-                        let monType = document.createElement("btn")
-                        monType.innerHTML = bit.type.name
+                           monType = document.createElement("button")
+                              monType.innerText = bit.type.name
+                          
 //[can be removed from renderMon if part is defined]//
 //[all appending can be pulled out into its own function]//
-                        if ((pkmnType.childElementCount < 2) && (Array.from(pkmnType.children) !== Array.from(monType.innerHTML))) {
+                        if ((pkmnType.childElementCount < 2) && (Array.from(pkmnType.children) !== Array.from(monType.innerText))) {
+                                  
                             pkmnType.appendChild(monType)
+                            
+                        }
+                        typesClone = pkmnType.cloneNode(true)
+                           
+                         
+                            
+                           
+                 
+                          
+                           
+                        
                         let featTypeDamage = (damageValues[bit.type.name]) 
                             let weakTo = (featTypeDamage.double_damage_from)
+                                                         
                                 weakTo.forEach(weak =>{
-                                  let weakToList = document.createElement('btn')  
+                                  let weakToList = document.createElement('button')  
                                   weakToList.innerHTML = weak.name
                                   weakToList.style.color = 'orange'
                                   weakTypeFrom.appendChild(weakToList)
-                                  
+                                   weaknesses == true
+                                   weakToList.addEventListener('click', () => narrowByType(weak.name))
+                                 
                                 })
+                                
                             let strongTo = (featTypeDamage.double_damage_to)
+                           
                                 strongTo.forEach(strong =>{
-                                  let strongToList = document.createElement('btn')  
+                                  let strongToList = document.createElement('button')  
                                  strongToList.innerText = strong.name
                                   strongToList.style.color = 'silver'
                                   strongTypeTo.appendChild(strongToList)
+                                   weaknesses == true
+                                  strongToList.addEventListener('click', () => narrowByType(strong.name))
                                 })
+                         
                             let strongAgainst = featTypeDamage.half_damage_from
+                              
                                 strongAgainst.forEach(strong =>{
-                                  let strongAgainstList = document.createElement('btn')  
+                                  let strongAgainstList = document.createElement('button')  
                                  strongAgainstList.innerText = strong.name
                                   strongAgainstList.style.color = 'gold'
                                   strongTypeFrom.appendChild(strongAgainstList)
+                                   weaknesses == true
+                                   strongAgainstList.addEventListener('click', () => narrowByType(strong.name))
                                 })
+                     
                             let weakAgainst = (featTypeDamage.half_damage_to)
+                                   
                              weakAgainst.forEach(weak =>{
-                                  let weakAgainstList = document.createElement('btn')  
+                                  let weakAgainstList = document.createElement('button')  
                                   weakAgainstList.innerText = weak.name
                                   weakAgainstList.style.color = 'red'
                                   weakTypeTo.appendChild(weakAgainstList)
-                             })}
+                                   weaknesses == true
+                                weakAgainstList.addEventListener('click', () => narrowByType(weak.name))
+                             })
 //closes montypes for each//
-                    }) 
-             
+                            })
+                   
 //render mon end//
 }
+            
+//[can be removed from renderMon if part is defined]//
+//[all appending can be pulled out into its own function]//
+                       
 //loads descriptive dex text//                    
                     function loadDexEntries(pkmn) {
                         fetch("https://pokeapi.co/api/v2/pokemon-species/" + pkmn.name + "/")
@@ -235,7 +362,7 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
 //loads descriptive dex text end//
                             }
 //**dropdown creation-- region **/
-        $(regionChoice).change(function () {
+$(regionChoice).change(function () {
             switch (regionChoice.value) {
                     case 'region':    
                         openingFetch()
@@ -289,6 +416,7 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
                                                     nameLiNew.addEventListener('click', () => fetchMon(pkmn.pokemon_species))
                                                     if ((monList.childElementCount < entryList.length) && ((Array.from(monList.children) !== (Array.from(nameLiNew.innerHTML))))) {
                                                          monList.appendChild(nameLiNew)
+                                                         nameLiNew.hasEvent = false
                                                          //end of third if statement//
                                                                     }
                                                     //end of second if statement//
@@ -304,7 +432,17 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
 //**dropdown creation-- region end//
                             })              
 //**dropdown creation-- type//
-     $(typeChoice).change(function () {
+function narrowByType(typeName) {
+    removeAllChildNodes(monList)
+                    let pkmnOfType = typeCheck[typeName]
+                    pkmnOfType.forEach(mon => { 
+                        let nameLiNew = document.createElement('li')
+                        nameLiNew.innerHTML = mon.pokemon.name
+                        nameLiNew.addEventListener('click', () => fetchMon(mon.pokemon))                               
+                        monList.append(nameLiNew)        
+                                                
+})}
+ $(typeChoice).change(function () {
 
         switch (typeChoice.value) {
             case 'type':
@@ -366,16 +504,11 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
             //end of type switch statement
             }
             //redoes sidebar
-                removeAllChildNodes(monList)
-                    let pkmnOfType = typeCheck[typeName]
-                    pkmnOfType.forEach(mon => { 
-                        let nameLiNew = document.createElement('li')
-                        nameLiNew.innerHTML = mon.pokemon.name
-                        nameLiNew.addEventListener('click', () => fetchMon(mon.pokemon))                               
-                        monList.append(nameLiNew)        
-                                                
-            })
+            narrowByType(typeName)
+
     //end of type dropdown//
     });
-    //end of doc ready//
+    
+
+//end of doc ready//
   })  

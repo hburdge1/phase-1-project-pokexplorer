@@ -1,32 +1,41 @@
 html,
 body {
+  padding-left: 5%;
+  padding-right: 5%;
   margin: auto;
-  text-align: center;
+  background-color:rgb(65, 0, 0);
+  overflow: hidden;
 }
 
 .container {
   display: grid;
   grid-template-columns: auto auto auto;
-  grid-template-rows: 50% 50% 50%;
-  width: 90%;
-  height: 35rem;
+  grid-template-rows: 15rem 25% auto auto;
+  width: 100%;
+  height: 100%;
   border-style: solid;
   border-color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.747);
   border-width: 1px;
   margin: auto;
 }
 
-body > div, .container > div, .row1 > div {
+.container > div {
+  overflow: auto;
+}
+
+body > div, .container > div, #myMons {
   border-style: solid;
   border-color: rgb(0, 0, 0);
   border-width: 1px;
   text-align: center;
 }
 
-.nav {
+/* #monLookup {
 width: 100%;
-z-index: 1000;
-}
+text-align: right;
+background-color: rgb(109, 109, 109)
+} */
 
 .row1 {
   grid-column: span 3;
@@ -34,62 +43,140 @@ z-index: 1000;
   grid-template-columns: auto 5% auto 5% auto;
 }
 
+#my-mons {
+  grid-column: span 3;
+  height: 50px;
+}
+
 img {
 max-height: 50%;
 max-width: 50%;
 }
-/* sidebar data; I deleted a bunch of unnecessary stuff*/
+
+.dex-regions {
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 30px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: rgb(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 45px;
+  background-color: #e0a500;
+}
+
+.nav-top {
+  text-align: center;
+  background-color: rgb(109, 109, 109);
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.title {
+  font-size: 30px;
+  color: white;
+}
+
+.align-center {
+  text-align: center;
+}
+
+#mon {
+  margin-left: 32%;
+}
+
+
+
+
+
+
+
 .main-menu:hover,
 nav.main-menu.expanded {
-    width: 250px;
-    overflow: visible;
+  width: 150px;
+  overflow: auto;
 }
 .main-menu {
   /*some amount of this is needec; deleting it makes the page all one big bar*/
-    background: #fbfbfb;
-    border-right: 1px solid #e5e5e5;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    left: 0;
-    width: 20px;
-    overflow: hidden;
-    -webkit-transition: width .05s linear;
-    transition: width .05s linear;
-    -webkit-transform: translateZ(0) scale(1, 1);
-    z-index: 0;
-    
+  background: #fbfbfb;
+  border-right: 10px solid #e0a500;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  width: 0px;
+  overflow: hidden;
+  -webkit-transition: width 0.05s linear;
+  transition: width 0.05s linear;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  z-index: 0;
 }
 .no-touch .scrollable.hover {
-    overflow-y: hidden;
+  overflow-y: hidden;
 }
 .no-touch .scrollable.hover:hover {
-    overflow-y: auto;
-
+  overflow-y: auto;
 }
 /*this keeps bullet points off on the sidebar, I like this*/
 nav ul,
 nav li {
-    outline: 0;
-    margin: 0;
-    padding: 0;
-}
-/*this is needed for now*/
-.area {
-    float: left;
-    background: #e2e2e2;
-    width: fit-content;
-    height: 100%;
-}
-@font-face {
-    font-family: 'Titillium Web';
-    font-style: normal;
-    font-weight: 300;
-    src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
-.btn {
-  border-radius: 12px;
-  font-size: 16px;
-  border: 2px solid black;}
+@font-face {
+  font-family: "Titillium Web";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Titillium WebLight"), local("TitilliumWeb-Light"),
+    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
+      format("woff");
+}
+/* #mon-list {
+  color: white;
+}
+
+#mon-list:hover {
+  color: black;
+} */
+
+.rough{
+  color:firebrick
+}
+.fine{
+  color:goldenrod
+}
+.good{
+  color:green;
+}
+
+.right-menu:hover,
+nav.right-menu.expanded {
+  width: 150px;
+  overflow: auto;
+}
+.right-menu {
+  /*some amount of this is needec; deleting it makes the page all one big bar*/
+  background: #fbfbfb;
+  border-right: 10px solid #e0a500;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  right: 0;
+  width: 0px;
+  overflow: hidden;
+  -webkit-transition: width 0.05s linear;
+  transition: width 0.05s linear;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  z-index: 0;
+}
