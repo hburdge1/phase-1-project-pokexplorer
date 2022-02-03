@@ -16,7 +16,7 @@ const monList = document.getElementById("mon-list")
 let weaknesses = false
 const damageValues = {}
 const typeCheck = {}
-
+let typesClone
 let monNames = [] 
 let typesArr = []
   let teamDiv = document.createElement('div')
@@ -173,12 +173,12 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
 
 //--render fetched data from pokemon url//
         function renderMon(part){
- 
+                    console.log(part.types[0].type.name)
                     monImage = document.getElementById('main-img')
                     monImage.src = "src/pokemon/" + part.id + ".png"
                     let myMonTeam = document.getElementById('my-mons')
                        
-                    if (monImage.hasListener == true){removeAllChildNodes(teamDiv)}
+                     if (monImage.hasListener == true){removeAllChildNodes(teamDiv)}
                         //typebutton.innerText = 
                   
                     if (monImage.hasListener) ()=> monImage.removeEventListener('click', addToTeam())
@@ -189,10 +189,11 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
                         monImage.hasListener = true;
                       
                          
-                     monTeamName.innerHTML = `${part.name}`
-                        teamImg.src = "src/sprites/sprites/sprites/pokemon/" + part.id + '.png'
+                     monTeamName.innerHTML = `<br>${part.name}<hr>`
+                        teamImg.src = "src/pokemon/" + part.id + ".png"
                         teamDiv.append(teamImg)
                         teamDiv.append(monTeamName)
+                        teamDiv.append(typesClone)
                     //    
                     })
                        myMonTeam.append(teamDiv) 

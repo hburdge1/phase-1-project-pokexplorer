@@ -3,7 +3,7 @@ body {
   padding-left: 5%;
   padding-right: 5%;
   margin: auto;
-  background-color:rgb(65, 0, 0);
+  background-color: rgb(65, 0, 0);
   overflow: hidden;
 }
 
@@ -24,7 +24,9 @@ body {
   overflow: auto;
 }
 
-body > div, .container > div, #myMons {
+body > div,
+.container > div,
+#myMons {
   border-style: solid;
   border-color: rgb(0, 0, 0);
   border-width: 1px;
@@ -49,8 +51,8 @@ background-color: rgb(109, 109, 109)
 }
 
 img {
-max-height: 50%;
-max-width: 50%;
+  max-height: 50%;
+  max-width: 50%;
 }
 
 .dex-regions {
@@ -90,12 +92,6 @@ max-width: 50%;
 #mon {
   margin-left: 32%;
 }
-
-
-
-
-
-
 
 .main-menu:hover,
 nav.main-menu.expanded {
@@ -149,24 +145,30 @@ nav li {
   color: black;
 } */
 
-.rough{
-  color:firebrick
+.rough {
+  color: firebrick;
 }
-.fine{
-  color:goldenrod
+.fine {
+  color: goldenrod;
 }
-.good{
-  color:green;
+.good {
+  color: green;
 }
 
 .right-menu:hover,
 nav.right-menu.expanded {
   width: 150px;
-  overflow: auto;
+  /* padding-left: auto;
+  padding-right: auto; */
+  /* margin: auto; */
+  /* align-content: space-around; */
+  text-align: center;
 }
 .right-menu {
   /*some amount of this is needec; deleting it makes the page all one big bar*/
   background: #fbfbfb;
+  align-content: space-around;
+  text-align: justify;
   border-right: 10px solid #e0a500;
   position: absolute;
   top: 0;
@@ -179,4 +181,6 @@ nav.right-menu.expanded {
   transition: width 0.05s linear;
   -webkit-transform: translateZ(0) scale(1, 1);
   z-index: 0;
+  align-content: center;
+  text-align: center;
 }
