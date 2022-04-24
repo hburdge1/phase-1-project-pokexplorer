@@ -23,8 +23,40 @@ let typesArr = []
 let typesUrlArr = [] 
 let regionArr = []
 let courseArr = []
-let dataset
 let regionNameString
+const typeIcons = {
+  bug: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Pok%C3%A9mon_Bug_Type_Icon.svg/240px-Pok%C3%A9mon_Bug_Type_Icon.svg.png",
+  dark: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Pok%C3%A9mon_Dark_Type_Icon.svg/240px-Pok%C3%A9mon_Dark_Type_Icon.svg.png",
+  dragon:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Pok%C3%A9mon_Dragon_Type_Icon.svg/120px-Pok%C3%A9mon_Dragon_Type_Icon.svg.png",
+  electric:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Pok%C3%A9mon_Electric_Type_Icon.svg/120px-Pok%C3%A9mon_Electric_Type_Icon.svg.png",
+  fairy:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Pok%C3%A9mon_Electric_Type_Icon.svg/120px-Pok%C3%A9mon_Electric_Type_Icon.svg.png",
+  fighting:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Pok%C3%A9mon_Electric_Type_Icon.svg/120px-Pok%C3%A9mon_Electric_Type_Icon.svg.png",
+  fire: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Pok%C3%A9mon_Fire_Type_Icon.svg/240px-Pok%C3%A9mon_Fire_Type_Icon.svg.png",
+  flying:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Pok%C3%A9mon_Flying_Type_Icon.svg/120px-Pok%C3%A9mon_Flying_Type_Icon.svg.png",
+  ghost:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pok%C3%A9mon_Ghost_Type_Icon.svg/120px-Pok%C3%A9mon_Ghost_Type_Icon.svg.png",
+  grass:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Pok%C3%A9mon_Grass_Type_Icon.svg/120px-Pok%C3%A9mon_Grass_Type_Icon.svg.png",
+  ground:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Pok%C3%A9mon_Ground_Type_Icon.svg/120px-Pok%C3%A9mon_Ground_Type_Icon.svg.png",
+  ice: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Pok%C3%A9mon_Ice_Type_Icon.svg/120px-Pok%C3%A9mon_Ice_Type_Icon.svg.png",
+  normal:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Pok%C3%A9mon_Normal_Type_Icon.svg/120px-Pok%C3%A9mon_Normal_Type_Icon.svg.png",
+  poison:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/120px-Pok%C3%A9mon_Poison_Type_Icon.svg.png",
+  psychic:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pok%C3%A9mon_Psychic_Type_Icon.svg/120px-Pok%C3%A9mon_Psychic_Type_Icon.svg.png",
+  rock: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Pok%C3%A9mon_Rock_Type_Icon.svg/120px-Pok%C3%A9mon_Rock_Type_Icon.svg.png",
+  steel:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Pok%C3%A9mon_Steel_Type_Icon.svg/120px-Pok%C3%A9mon_Steel_Type_Icon.svg.png",
+  water:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Pok%C3%A9mon_Water_Type_Icon.svg/120px-Pok%C3%A9mon_Water_Type_Icon.svg.png",
+};
 
 // function duplicateChildNodes (parentId){
 //   var parent = document.getElementById(parentId);
@@ -106,52 +138,15 @@ getTypes()
 //sidebar start
 function loadSidebar(namesArr) {
         namesArr.forEach(mon => {
-
             let nameLi = document.createElement("li")
             monNames.push(mon.name)
             nameLi.innerHTML = mon.name
             nameLi.addEventListener('click', () => fetchMon(mon))
             monList.appendChild(nameLi)
+            $('<hr/>').insertBefore(nameLi)
         })
     //sidebar end
  }
-
-//get mon loaded
-// let evolDataset =[]
-
-// let evolFin = []
-
-//  function retrieveEvolution() {
-//         fetch ('https://pokeapi.co/api/v2/evolution-chain/?limit=335')
-//             .then(data => data.json())
-//             .then(p => {
-//                 const alphaNumEvol = [];
-//                 alphaNumEvol.push([p]);
-//                 //let newEvolArr = (alphaNumEvol[0])
-//                 evolDataset = [alphaNumEvol[0][0].results]
-//                 console.log(evolDataset)
-//                 let keyAll = Object.keys(evolDataset)
-//                 let keyArr = (evolDataset[keyAll])
-//                 keyArr.forEach(k => {
-//                     fetch(Object.values(k))
-//                     .then(data => data.json())
-//                     .then(j => {
-//                         evolFin.push(j.chain)
-//                         evolFin.forEach(link => 
-//                             delete (link.is_baby))
-//                         evolFin.forEach(link => 
-//                             delete (link.evolution_details))
-                        
-//                     })
-//                 })
-//                })                       
-        
-//            } 
-
-//   retrieveEvolution()
-  
-
-        
 
 //featured mon on page fetched; data needed is mon.name or mon.id//
 function fetchMon(mon) {
@@ -272,64 +267,48 @@ document.getElementById('monLookup').addEventListener('submit', (e) =>{
                     montypes.forEach(bit => {
                            monType = document.createElement("button")
                               monType.innerText = bit.type.name
-                          
-//[can be removed from renderMon if part is defined]//
-//[all appending can be pulled out into its own function]//
-                        if ((pkmnType.childElementCount < 2) && (Array.from(pkmnType.children) !== Array.from(monType.innerText))) {
-                                  
-                            pkmnType.appendChild(monType)
-                            
-                        }
-                        typesClone = pkmnType.cloneNode(true)
-                           
-                         
-                            
-                           
-                 
-                          
-                           
                         
-                        let featTypeDamage = (damageValues[bit.type.name]) 
-                            let weakTo = (featTypeDamage.double_damage_from)
+                    let featTypeDamage = (damageValues[bit.type.name]) 
+                        let weakTo = (featTypeDamage.double_damage_from)
                                                          
                                 weakTo.forEach(weak =>{
-                                  let weakToList = document.createElement('button')  
-                                  weakToList.innerHTML = weak.name
-                                  weakToList.style.color = 'orange'
+                                  let weakToList = document.createElement('img')  
+                                  weakToList.src= typeIcons[weak.name]
+                                  weakToList.className = "typeimg"
                                   weakTypeFrom.appendChild(weakToList)
                                    weaknesses == true
                                    weakToList.addEventListener('click', () => narrowByType(weak.name))
                                  
                                 })
                                 
-                            let strongTo = (featTypeDamage.double_damage_to)
+                        let strongTo = (featTypeDamage.double_damage_to)
                            
                                 strongTo.forEach(strong =>{
-                                  let strongToList = document.createElement('button')  
-                                 strongToList.innerText = strong.name
-                                  strongToList.style.color = 'silver'
+                                  let strongToList = document.createElement('img')  
+                                 strongToList.src= typeIcons[strong.name]
+                                  strongToList.className = "typeimg"
                                   strongTypeTo.appendChild(strongToList)
                                    weaknesses == true
                                   strongToList.addEventListener('click', () => narrowByType(strong.name))
                                 })
                          
-                            let strongAgainst = featTypeDamage.half_damage_from
+                        let strongAgainst = featTypeDamage.half_damage_from
                               
                                 strongAgainst.forEach(strong =>{
-                                  let strongAgainstList = document.createElement('button')  
-                                 strongAgainstList.innerText = strong.name
-                                  strongAgainstList.style.color = 'gold'
+                                 let strongAgainstList = document.createElement('img')  
+                                 strongAgainstList.src= typeIcons[strong.name]
+                                 strongAgainstList.className = "typeimg"
                                   strongTypeFrom.appendChild(strongAgainstList)
                                    weaknesses == true
                                    strongAgainstList.addEventListener('click', () => narrowByType(strong.name))
                                 })
                      
-                            let weakAgainst = (featTypeDamage.half_damage_to)
+                        let weakAgainst = (featTypeDamage.half_damage_to)
                                    
                              weakAgainst.forEach(weak =>{
-                                  let weakAgainstList = document.createElement('button')  
-                                  weakAgainstList.innerText = weak.name
-                                  weakAgainstList.style.color = 'red'
+                                  let weakAgainstList = document.createElement('img')  
+                                  weakAgainstList.src= typeIcons[weak.name]
+                                  weakAgainstList.className = "typeimg"
                                   weakTypeTo.appendChild(weakAgainstList)
                                    weaknesses == true
                                 weakAgainstList.addEventListener('click', () => narrowByType(weak.name))

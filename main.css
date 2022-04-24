@@ -5,6 +5,8 @@ body {
   margin: auto;
   background-color: rgb(65, 0, 0);
   overflow: hidden;
+  font-family: Calibri, Helvetica, sans-serif;  
+    background-image: url("https://wallpapercave.com/wp/DRd73IK.jpg");
 }
 
 .container {
@@ -16,8 +18,11 @@ body {
   border-style: solid;
   border-color: rgb(0, 0, 0);
   background-color: rgba(255, 255, 255, 0.747);
-  border-width: 1px;
+  gap: 0px;
+  max-width: 75%;
   margin: auto;
+  height: 100%;
+  background-color: rgb(99, 99, 99, 0.7);
 }
 
 .container > div {
@@ -33,11 +38,6 @@ body > div,
   text-align: center;
 }
 
-/* #monLookup {
-width: 100%;
-text-align: right;
-background-color: rgb(109, 109, 109)
-} */
 
 .row1 {
   grid-column: span 3;
@@ -55,9 +55,6 @@ img {
   max-width: 50%;
 }
 
-.dex-regions {
-  overflow: auto;
-}
 
 ::-webkit-scrollbar {
   width: 15px;
@@ -79,14 +76,17 @@ img {
   padding-bottom: 5px;
   padding-right: 5px;
 }
-
+#footer {
+  grid-column: auto / span 3;
+  background-color: rgb(48, 48, 48);
+  text-align: right;
+  color: white;
+  padding-top: 5px;
+  padding-right: 5px;
+}
 .title {
   font-size: 30px;
   color: white;
-}
-
-.align-center {
-  text-align: center;
 }
 
 #mon {
@@ -100,7 +100,7 @@ nav.main-menu.expanded {
 }
 .main-menu {
   /*some amount of this is needec; deleting it makes the page all one big bar*/
-  background: #fbfbfb;
+  background: linear-gradient(rgb(0, 0, 0, 0), rgb(211, 211, 211));
   border-right: 10px solid #e0a500;
   position: absolute;
   top: 0;
@@ -114,6 +114,7 @@ nav.main-menu.expanded {
   -webkit-transform: translateZ(0) scale(1, 1);
   z-index: 0;
 }
+ 
 .no-touch .scrollable.hover {
   overflow-y: hidden;
 }
@@ -184,3 +185,8 @@ nav.right-menu.expanded {
   align-content: center;
   text-align: center;
 }
+  .typeimg img {
+    margin-top: 5px;
+    width: 15px;
+    height: 15px;
+  }
